@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Pago</title>
+    <link rel="stylesheet" href="~/css/materialize.min.css">
+    
+</head>
+<body>
+
+    <div class="row">
+        <div class="col l4">
+            <div class="card">
+                <div class="card-image">
+                    <img height="400px" src="https://m.media-amazon.com/images/I/51y4gnO7JoL.__AC_SX300_SY300_QL70_ML2_.jpg">
+                    <span class="card-title">Peluche</span>
+                </div>
+                <div class="card-content">
+                    <p class="titulo">
+                        Venta de peluche de gato
+                    </p>
+                    <p> $ <span id="Precio" >150</span> </p>
+                </div>
+                <div class="card-action">
+                    <button id="btnCompra" class="btn">Comprar </button>
+                    <div id="wallet_container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>Payment ID: @ViewBag.PaymentID</p>
+    
+
+
+    <script src="~/js/materialize.min.js"></script>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script src="~/js/Main.js" ></script>
+
+</body>
+</html>
+

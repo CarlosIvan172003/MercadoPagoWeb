@@ -1,0 +1,22 @@
+
+60043477664
+
+
+https://localhost:7109/Home/Success?payment_id=60043477664
+
+https://www.mercadopago.com.mx/checkout/v1/payment/redirect/386a14b3-ab00-4032-9a3a-9ce64725059a/congrats/instructions/?preference-id=426084685-cbacaa94-d170-4336-aca3-bd654fa3dc5f&correlation_id=99235f38-d7e9-4bd2-b82f-dae636e76fd6&sniffing-rollout=sniffing-api&router-request-id=72ef8852-ca46-4391-a2f6-2313293c2810&p=bd5579e4eb06b7e250901b23286e1099#/
+
+
+https://hostingpruebas.bsite.net/Home/Success?collection_id=1318439384&collection_status=pending&payment_id=1318439384&status=pending&external_reference=null&payment_type=atm&merchant_order_id=19290806466&preference_id=426084685-cbacaa94-d170-4336-aca3-bd654fa3dc5f&site_id=MLM&processing_mode=aggregator&merchant_account_id=null
+
+
+
+
+
+
+
+https://api.mercadopago.com/checkout/preferences/426084685-360d22e7-7dce-4928-a525-6d15357f78fa
+https://api.mercadopago.com/v1/payment_methods
+
+Content-Type            application/json
+Authorization           Bearer TEST-124798443317507-060115-2216c7f64f18aa5b1592bb88c9927f83-426084685
