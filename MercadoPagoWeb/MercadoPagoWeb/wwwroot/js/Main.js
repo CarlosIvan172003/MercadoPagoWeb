@@ -1,6 +1,6 @@
 ﻿
 /*----------------- Public key de mercado pago -----------------*/
-const mp = new MercadoPago('TEST-795216f6-3c7a-4bae-b0cd-6b36a85a2614', {
+const mp = new MercadoPago('TEST-3912e157-3d0f-4e96-b29c-2251b7195947', {
     locale: 'es-MX'
 });
 

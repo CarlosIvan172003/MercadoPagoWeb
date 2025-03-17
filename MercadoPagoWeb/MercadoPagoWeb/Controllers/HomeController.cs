@@ -8,6 +8,7 @@ using MercadoPago.Client.Payment;
 using MercadoPago.Client.Common;
 using Newtonsoft.Json;
 using MercadoPagoWeb.Servicios;
+using System.Text.Json;
 
 namespace MercadoPagoWeb.Controllers
 {
@@ -32,7 +33,7 @@ namespace MercadoPagoWeb.Controllers
         public async Task<IActionResult> CrearPreferencia([FromBody] Orden orden)
         {
             /*----------------- Access token de mercado pago -----------------*/
-            MercadoPagoConfig.AccessToken = "TEST-124798443317507-060115-2216c7f64f18aa5b1592bb88c9927f83-426084685";
+            MercadoPagoConfig.AccessToken = "TEST-5657792582713871-031117-bd5a11bb9716199524d997da75ba95bb-426084685";
 
             /*- Creacion de la referencia -*/
             var Request = new PreferenceRequest
@@ -51,9 +52,9 @@ namespace MercadoPagoWeb.Controllers
                 /*- Redirecciones -*/
                 BackUrls = new PreferenceBackUrlsRequest
                 {
-                    Success = "https://hostingpruebas.bsite.net/Home/Success",
-                    Failure = "https://hostingpruebas.bsite.net/Home/Failure",
-                    Pending = "https://hostingpruebas.bsite.net/Home/Pending"
+                    Success = "https://CarlosPruebas.bsite.net/Home/Success",
+                    Failure = "https://CarlosPruebas.bsite.net/Home/Failure",
+                    Pending = "https://CarlosPruebas.bsite.net/Home/Pending"
                 },
                 AutoReturn = "approved",
                 /*- Exclusion de motodos de pago -*/
@@ -68,7 +69,8 @@ namespace MercadoPagoWeb.Controllers
                         new PreferencePaymentTypeRequest { Id = "ticket" },
                         new PreferencePaymentTypeRequest { Id = "bank_transfer" }
                     }
-                }
+                },
+                NotificationUrl = "https://CarlosPruebas.bsite.net/Home/ReceiveWebhook"
             };
             var client = new PreferenceClient();
             Preference preference = await client.CreateAsync(Request);
@@ -80,7 +82,6 @@ namespace MercadoPagoWeb.Controllers
         {
             var DatosCompraString = await _Peticiones.GetPreferenceID(preference_id);
             var DatosCompra = JsonConvert.DeserializeObject<PreferenceRequest>(DatosCompraString);
-
 
             TempData["PaymentID"] = DatosCompraString;
             return RedirectToAction("Index");
@@ -95,7 +96,6 @@ namespace MercadoPagoWeb.Controllers
             TempData["PaymentID"] = DatosCompraString;
             return RedirectToAction("Index");
         }
-
         public async Task<IActionResult> Pending(string preference_id)
         {
             var DatosCompraString = await _Peticiones.GetPreferenceID(preference_id);
@@ -105,6 +105,7 @@ namespace MercadoPagoWeb.Controllers
             TempData["PaymentID"] = DatosCompraString;
             return RedirectToAction("Index");
         }
+        
 
 
         [HttpPost]
@@ -123,6 +124,20 @@ namespace MercadoPagoWeb.Controllers
 
             _Context.Add(datosPago);
 
+            await _Context.SaveChangesAsync();
+            return Ok();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ReceiveWebhook([FromBody] JsonElement payload)
+        {
+            DatosPago newDatos = new DatosPago
+            {
+                Accion = payload.ToString()
+            };
+
+            _Context.DatosPago.Add(newDatos);
             await _Context.SaveChangesAsync();
             return Ok();
         }
